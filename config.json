@@ -1,0 +1,12 @@
+{
+  "companies" : [
+    {
+      "maxDamageLevel" : 5,
+      "maxMorons": 3
+    },
+    {
+      "maxDamageLevel" : 7,
+      "maxMorons": 4
+    }
+  ]
+}
