@@ -3,6 +3,8 @@
 //
 #include <fstream>
 #include "Configuration.h"
+int Configuration::initMoronsNumber = -1;
+int Configuration::N = -1;
 void Configuration::loadConfiguration() {
 
     std::ifstream i("config.json");
@@ -13,4 +15,8 @@ void Configuration::loadConfiguration() {
         Company c(jsonCompany);
         std::cout<<"max dmg lvl from json "<<c.maxDamageLevel<<"\n";
     }
+}
+
+int Configuration::getInitMoronsNumber() {
+    return Configuration::initMoronsNumber;
 }

@@ -11,10 +11,16 @@
 using json = nlohmann::json;
 
 class Configuration {
+private:
+    static int initMoronsNumber; //Agent initial morons number
+    static int N;
 public:
-    static const int D;
-    static const int N;
     static std::vector<Company> companies;
+
     static void loadConfiguration();
+
+    static int getInitMoronsNumber();
+
 };
+
 #endif //MPI_UNEMPLOYED_MORONS_CONFIGURATION_H

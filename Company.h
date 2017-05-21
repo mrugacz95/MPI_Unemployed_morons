@@ -16,6 +16,7 @@ using json = nlohmann::json;
 class Company {
 public:
     Company(const json &j);
+
     int moronsNumber;
     int maxDamageLevel;
     int id;
