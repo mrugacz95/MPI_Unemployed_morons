@@ -3,17 +3,14 @@
 #include "domain/Configuration.h"
 #include "domain/Agent.h"
 
-#include "include/Json.h"
+#include "utils/JsonLoader.h"
 #include "jsonConverters/ConfigurationJsonConverter.h"
-#include <fstream>
 
 int main(int argc, char *argv[]) {
     int rank, agentsNumber;
 
-    std::ifstream jsonStream("src/domain/config.json");
-    Json configJson;
-    jsonStream >> configJson;
-    ConfigurationJsonConverter::getFromJson(configJson);
+    JsonRef configJson = JsonLoader::loadJson("src/config.json");
+    ConfigurationJsonConverter::getFromJson(*(configJson.get()));
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
