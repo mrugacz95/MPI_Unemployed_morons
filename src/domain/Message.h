@@ -6,7 +6,7 @@
 #define MPI_UNEMPLOYED_MORONS_MESSAGE_H
 
 
-typedef struct Message {
+struct Message {
     enum TYPE {REQUEST,REPLAY};
     TYPE type;
     int companyId;

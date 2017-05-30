@@ -1,12 +1,11 @@
 /* C Example */
 #include <mpi.h>
-#include "Configuration.h"
-#include "Message.h"
-#include "Agent.h"
+#include "domain/Configuration.h"
+#include "domain/Message.h"
+#include "domain/Agent.h"
 
 int main(int argc, char *argv[]) {
     int rank, agentsNumber;
-
 
     Configuration::loadConfiguration();
 

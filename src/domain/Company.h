@@ -9,7 +9,7 @@
 #include "AgentOnQueue.h"
 #include <queue>
 
-#include "json.hpp"
+#include "../include/json.hpp"
 
 using json = nlohmann::json;
 
@@ -24,7 +24,7 @@ public:
     int maxMorons;
     std::priority_queue<AgentOnQueue> waitingQueue;
     int timestamp;
-    typedef struct DataToSend {
+    struct DataToSend {
     };
 
     DataToSend getDataToSend();

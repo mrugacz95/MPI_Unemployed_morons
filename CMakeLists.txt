@@ -7,7 +7,7 @@ find_package(MPI REQUIRED)
 
 include_directories(${MPI_INCLUDE_PATH})
 
-add_executable(run main.cpp AgentOnQueue.h Company.cpp Company.h Message.h Configuration.h json.hpp Configuration.cpp Agent.cpp Agent.h)
+add_executable(run src/main.cpp src/domain/AgentOnQueue.h src/domain/Company.cpp src/domain/Company.h src/domain/Message.h src/domain/Configuration.h src/include/json.hpp src/domain/Configuration.cpp src/domain/Agent.cpp src/domain/Agent.h)
 target_link_libraries(run ${MPI_LIBRARIES})
 
 if(MPI_COMPILE_FLAGS)

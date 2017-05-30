@@ -5,7 +5,7 @@
 #ifndef MPI_UNEMPLOYED_MORONS_CONFIGURATION_H
 #define MPI_UNEMPLOYED_MORONS_CONFIGURATION_H
 
-#include "json.hpp"
+#include "../include/json.hpp"
 #include "Company.h"
 
 using json = nlohmann::json;

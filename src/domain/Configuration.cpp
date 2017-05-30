@@ -7,7 +7,7 @@ int Configuration::agentsInitialMoronsNumber = -1;
 int Configuration::numberOfAgents = -1;
 void Configuration::loadConfiguration() {
 
-    std::ifstream jsonStream("config.json");
+    std::ifstream jsonStream("src/domain/config.json");
     json configJson;
     jsonStream >> configJson;
     for(json::iterator it = configJson["companies"].begin(); it != configJson["companies"].end(); it++){
