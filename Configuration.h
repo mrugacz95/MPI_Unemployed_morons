@@ -12,8 +12,8 @@ using json = nlohmann::json;
 
 class Configuration {
 private:
-    static int initMoronsNumber; //Agent initial morons number
-    static int N;
+    static int agentsInitialMoronsNumber;
+    static int numberOfAgents;
 public:
     static std::vector<Company> companies;
 

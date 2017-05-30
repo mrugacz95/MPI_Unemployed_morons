@@ -3,14 +3,14 @@
 //
 #include <fstream>
 #include "Configuration.h"
-int Configuration::initMoronsNumber = -1;
-int Configuration::N = -1;
+int Configuration::agentsInitialMoronsNumber = -1;
+int Configuration::numberOfAgents = -1;
 void Configuration::loadConfiguration() {
 
-    std::ifstream i("config.json");
-    json j;
-    i >> j;
-    for(json::iterator it = j["companies"].begin(); it != j["companies"].end(); it++){
+    std::ifstream jsonStream("config.json");
+    json configJson;
+    jsonStream >> configJson;
+    for(json::iterator it = configJson["companies"].begin(); it != configJson["companies"].end(); it++){
         json jsonCompany = it.value();
         Company c(jsonCompany);
         std::cout<<"max dmg lvl from json "<<c.maxDamageLevel<<"\n";
@@ -18,5 +18,5 @@ void Configuration::loadConfiguration() {
 }
 
 int Configuration::getInitMoronsNumber() {
-    return Configuration::initMoronsNumber;
+    return Configuration::agentsInitialMoronsNumber;
 }
