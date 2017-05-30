@@ -3,16 +3,15 @@
 //
 #include "Configuration.h"
 int Configuration::initialMoronsNumberPerAgent = -1;
-Companies Configuration::companies;
-
+CompaniesRef Configuration::companies;
 int Configuration::getInitialMoronsNumberPerAgent() {
     return Configuration::initialMoronsNumberPerAgent;
 }
 
-Companies Configuration::getCompanies() {
-    return Configuration::companies;
-}
-
 void Configuration::setInitialMoronsNumberPerAgent(int initialMoronsNumberPerAgent) {
     Configuration::initialMoronsNumberPerAgent = initialMoronsNumberPerAgent;
+}
+
+void Configuration::setCompanies(CompaniesRef companies) {
+    Configuration::companies = companies;
 }

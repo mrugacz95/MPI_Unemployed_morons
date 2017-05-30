@@ -13,11 +13,11 @@ using json = nlohmann::json;
 
 class Configuration {
 public:
-    static Companies getCompanies();
     static int getInitialMoronsNumberPerAgent();
     static void setInitialMoronsNumberPerAgent(int initialMoronsNumberPerAgent);
+    static void setCompanies(CompaniesRef companies);
 private:
-    static Companies companies;
+    static CompaniesRef companies;
     static int initialMoronsNumberPerAgent;
 };
 

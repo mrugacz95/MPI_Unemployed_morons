@@ -10,7 +10,7 @@
 
 class ConfigurationJsonConverter {
 public:
-    static void getFromJson(const Json &json);
+    static void getFromJson(const JsonRef json);
     static JsonRef convertToJson();
 };
 

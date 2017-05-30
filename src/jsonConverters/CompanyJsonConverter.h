@@ -10,8 +10,8 @@
 
 class CompanyJsonConverter {
 public:
-    static CompanyRef getCompanyFromJson(const Json &json);
-    static JsonRef convertCompanyToJson(const CompanyRef company);
+    static CompanyRef getFromJson(const JsonRef json);
+    static JsonRef convertToJson(const CompanyRef company);
 };
 
 

@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     int rank, agentsNumber;
 
     JsonRef configJson = JsonLoader::loadJson("src/config.json");
-    ConfigurationJsonConverter::getFromJson(*(configJson.get()));
+    ConfigurationJsonConverter::getFromJson(configJson);
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);

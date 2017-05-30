@@ -15,5 +15,6 @@ private:
     std::vector<CompanyRef> companies;
 };
 
+typedef std::shared_ptr<Companies> CompaniesRef;
 
 #endif //MPI_UNEMPLOYED_MORONS_COMPANIES_H

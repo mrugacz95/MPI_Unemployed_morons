@@ -3,14 +3,10 @@
 //
 
 #include "ConfigurationJsonConverter.h"
-#include "CompanyJsonConverter.h"
+#include "CompaniesJsonConverter.h"
 
-void ConfigurationJsonConverter::getFromJson(const Json &json) {
-    Configuration::setInitialMoronsNumberPerAgent(json.at("initialMoronsNumberPerAgent").get<int>());
-    for(Json::const_iterator it = json["companies"].begin(); it != json["companies"].end(); it++){
-        Json jsonCompany = it.value();
-        CompanyRef company = CompanyJsonConverter::getCompanyFromJson(jsonCompany);
-        Configuration::getCompanies().addCompany(company);
-        std::cout<<"max dmg lvl from json "<<company->maxDamageLevel<<"\n";
-    }
+void ConfigurationJsonConverter::getFromJson(const JsonRef json) {
+    Configuration::setInitialMoronsNumberPerAgent(json->at("initialMoronsNumberPerAgent").get<int>());
+    JsonRef jsonRef(new Json(json->at("companies")));
+    Configuration::setCompanies(CompaniesJsonConverter::getFromJson(jsonRef));
 }
