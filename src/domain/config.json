@@ -1,4 +1,5 @@
 {
+  "initialMoronsNumberPerAgent" : 5,
   "companies" : [
     {
       "maxDamageLevel" : 5,

@@ -9333,7 +9333,7 @@ class basic_json
                     const int byte2 = get();
                     check_eof();
 
-                    // code from RFC 7049, Appendix agentsInitialMoronsNumber, Figure 3:
+                    // code from RFC 7049, Appendix initialMoronsNumberPerAgent, Figure 3:
                     // As half-precision floating-point numbers were only added
                     // to IEEE 754 in 2008, today's programming platforms often
                     // still only have limited support for them. It is very

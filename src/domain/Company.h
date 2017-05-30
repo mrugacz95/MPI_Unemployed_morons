@@ -9,13 +9,14 @@
 #include "AgentOnQueue.h"
 #include <queue>
 
-#include "../include/json.hpp"
+#include "../libs/json.hpp"
 
 using json = nlohmann::json;
 
 class Company {
 public:
     Company(const json &j);
+    Company(int maxMorons, int maxDamageLevel);
 
     int moronsNumber;
     int maxDamageLevel;
@@ -28,11 +29,8 @@ public:
     };
 
     DataToSend getDataToSend();
-
-    void to_json(json &j, const Company &company);
-
-    void from_json(const json &j);
 };
 
+typedef std::shared_ptr<Company> CompanyRef;
 
 #endif //MPI_UNEMPLOYED_MORONS_COMPANY_H

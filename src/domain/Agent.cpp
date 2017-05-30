@@ -18,7 +18,7 @@ void Agent::SendToAll(Message *message) {
 }
 
 void Agent::run() {
-    moronsToDispose = Configuration::getInitMoronsNumber();
+    moronsToDispose = Configuration::getInitialMoronsNumberPerAgent();
     Message request{Message::REQUEST, 0, this->timestamp};
     SendToAll(&request);
     DisposeMorons();

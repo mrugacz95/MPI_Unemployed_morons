@@ -5,22 +5,20 @@
 #ifndef MPI_UNEMPLOYED_MORONS_CONFIGURATION_H
 #define MPI_UNEMPLOYED_MORONS_CONFIGURATION_H
 
-#include "../include/json.hpp"
+#include "../libs/json.hpp"
 #include "Company.h"
+#include "Companies.h"
 
 using json = nlohmann::json;
 
 class Configuration {
-private:
-    static int agentsInitialMoronsNumber;
-    static int numberOfAgents;
 public:
-    static std::vector<Company> companies;
-
-    static void loadConfiguration();
-
-    static int getInitMoronsNumber();
-
+    static Companies getCompanies();
+    static int getInitialMoronsNumberPerAgent();
+    static void setInitialMoronsNumberPerAgent(int initialMoronsNumberPerAgent);
+private:
+    static Companies companies;
+    static int initialMoronsNumberPerAgent;
 };
 
 #endif //MPI_UNEMPLOYED_MORONS_CONFIGURATION_H
