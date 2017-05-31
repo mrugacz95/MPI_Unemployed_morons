@@ -18,15 +18,18 @@ void Agent::SendToAll(Message *message) {
 }
 
 void Agent::run() {
-    moronsToDispose = Configuration::getInitialMoronsNumberPerAgent();
+    assignNewMorons();
     Message request{Message::REQUEST, 0, this->timestamp};
     SendToAll(&request);
     DisposeMorons();
+}
 
+void Agent::assignNewMorons() {
+    numberOfMoronsToDispose = Configuration::getInitialMoronsNumberPerAgent();
 }
 
 void Agent::DisposeMorons() {
-    while (moronsToDispose > 0) {
+    while (numberOfMoronsToDispose > 0) {
         Message message;
         receiveFromAny(&message);
         if (message.type == Message::REQUEST) {

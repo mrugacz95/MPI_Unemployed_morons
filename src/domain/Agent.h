@@ -11,7 +11,7 @@
 class Agent {
 private:
     int timestamp;
-    int moronsToDispose;
+    int numberOfMoronsToDispose;
     int rank;
     int agentsNumber;
 
@@ -29,6 +29,8 @@ public:
     void run();
 
     int getLastSender();
+
+    void assignNewMorons();
 };
 
 
