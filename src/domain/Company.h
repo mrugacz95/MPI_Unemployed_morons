@@ -8,14 +8,10 @@
 
 #include "AgentOnQueue.h"
 #include <queue>
-
-#include "../libs/json.hpp"
-
-using json = nlohmann::json;
+#include <memory>
 
 class Company {
 public:
-    Company(const json &j);
     Company(int maxMorons, int maxDamageLevel);
 
     int moronsNumber;
