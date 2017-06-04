@@ -11,6 +11,7 @@
 class Agent {
 private:
     int timestamp;
+    int initialNumberOfMorons;
     int numberOfMoronsToDispose;
     int rank;
     int agentsNumber;
@@ -24,7 +25,7 @@ private:
     void HandleRequest(Message *message);
 
 public:
-    Agent(int rank, int agentsNumber);
+    Agent(int rank, int agentsNumber, int initialNumberOfMorons);
 
     void run();
 

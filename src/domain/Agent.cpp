@@ -25,7 +25,7 @@ void Agent::run() {
 }
 
 void Agent::assignNewMorons() {
-    numberOfMoronsToDispose = Configuration::getInitialMoronsNumberPerAgent();
+    numberOfMoronsToDispose = this->initialNumberOfMorons;
 }
 
 void Agent::DisposeMorons() {
@@ -60,9 +60,10 @@ void Agent::HandleRequest(Message *message) {
 
 }
 
-Agent::Agent(int rank, int agentsNumber) {
+Agent::Agent(int rank, int agentsNumber, int initialNumberOfMorons) {
     this->rank = rank;
     this->agentsNumber = agentsNumber;
+    this->initialNumberOfMorons = initialNumberOfMorons;
 }
 
 int Agent::getLastSender() {

@@ -1,22 +1,36 @@
 /* C Example */
-#include <mpi.h>
-#include "domain/Configuration.h"
-#include "domain/Agent.h"
+#include <fstream>
+#include "cereal/archives/json.hpp"
 
-#include "utils/JsonLoader.h"
-#include "jsonConverters/ConfigurationJsonConverter.h"
+#include <mpi.h>
+#include "domain/Agent.h"
+#include "domain/Configuration.h"
+
 
 int main(int argc, char *argv[]) {
     int rank, agentsNumber;
 
-    JsonRef configJson = JsonLoader::loadJson("src/config.json");
-    ConfigurationJsonConverter::getFromJson(configJson);
+    std::ifstream inStream("configuration.json");
+    cereal::JSONInputArchive jsonInArchive(inStream);
+
+    Configuration configuration;
+
+    jsonInArchive(configuration);
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &agentsNumber);
 
-    Agent agent(rank, agentsNumber);
+    std::cout << "Hello from thread" << rank << " | "
+              << "morons per agent:" << configuration.initialMoronsNumberPerAgent << " | "
+              << "  company:" << " | "
+              << "      max damage: " << configuration.companies[0].maxDamageLevel << " | "
+              << "      max morons: " << configuration.companies[0].maxMorons << std::endl;
+
+    MPI_Finalize();
+    return 0;
+
+    Agent agent(rank, agentsNumber, configuration.initialMoronsNumberPerAgent);
     agent.run();
 
     MPI_Finalize();
