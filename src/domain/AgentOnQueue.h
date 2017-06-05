@@ -10,6 +10,8 @@ class AgentOnQueue {
     int id;
     int timestamp;
 public:
+    AgentOnQueue(int id, int timestamp);
+
     bool operator<(AgentOnQueue rhs) const {
         return this->timestamp < rhs.timestamp;
     }

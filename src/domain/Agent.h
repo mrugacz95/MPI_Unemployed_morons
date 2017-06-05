@@ -20,7 +20,7 @@ private:
 
     void DisposeMorons();
 
-    void HandleRequest(MessageRequest *message);
+    void SendRequest(MessageRequest *message);
 
     void initFromConfiguration(Configuration configuration);
 
@@ -33,6 +33,10 @@ public:
     void assignNewMorons();
 
     int timestamp = 0;
+
+    void requestAllComapnies();
+
+    void addToWaitingQueue(int companyId, AgentOnQueue &agent);
 };
 
 

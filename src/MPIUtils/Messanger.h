@@ -9,11 +9,15 @@
 
 class Messanger {
 public:
-    static void sendToAll(std::stringstream &serializedMessage, int msgTag);
+    static void sendToAll(std::stringstream &serializedMessage, int msgTag, int &timestamp);
 
     static std::stringstream receiveFromAny(int msgTag);
 
     static int getMessageLength(int msgTag);
+
+    static int getNextTag();
+
+    static int getSender();
 };
 
 #endif //MPI_UNEMPLOYED_MORONS_MESSANGER_H
