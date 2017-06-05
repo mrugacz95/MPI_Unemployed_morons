@@ -10,6 +10,10 @@
 int main(int argc, char *argv[]) {
     int rank, agentsNumber;
 
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &agentsNumber);
+
     std::ifstream inStream("configuration.json");
     cereal::JSONInputArchive jsonInArchive(inStream);
 
@@ -17,20 +21,14 @@ int main(int argc, char *argv[]) {
 
     jsonInArchive(configuration);
 
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &agentsNumber);
-
-    std::cout << "Hello from thread" << rank << " | "
+    std::cout << "Hello from thread: " << rank << " | "
               << "morons per agent:" << configuration.initialMoronsNumberPerAgent << " | "
-              << "  company:" << " | "
-              << "      max damage: " << configuration.companies[0].maxDamageLevel << " | "
-              << "      max morons: " << configuration.companies[0].maxMorons << std::endl;
+              << "company:" << " | "
+              << "max damage: " << configuration.companies[0].maxDamageLevel << " | "
+              << "max morons: " << configuration.companies[0].maxMorons << std::endl;
 
-    MPI_Finalize();
-    return 0;
 
-    Agent agent(rank, agentsNumber, configuration.initialMoronsNumberPerAgent);
+    Agent agent(rank, agentsNumber, configuration);
     agent.run();
 
     MPI_Finalize();

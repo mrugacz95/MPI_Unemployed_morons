@@ -5,22 +5,27 @@
 #include <mpi.h>
 #include "Agent.h"
 #include "Configuration.h"
-#include "Message.h"
 
-void Agent::SendToAll(Message *message) {
-    timestamp++;
-    MPI_Bcast(
-            message,
-            3,
-            MPI_INT,
-            0,
-            MPI_Comm MPI_COMM_WORLD);
+Agent::Agent(int rank, int agentsNumber, Configuration configuration) {
+    this->rank = rank;
+    this->agentsNumber = agentsNumber;
+    this->initFromConfiguration(configuration);
 }
+
+void Agent::initFromConfiguration(Configuration configuration) {
+    this->initialNumberOfMorons = configuration.initialMoronsNumberPerAgent;
+    for(Configuration::Company company : configuration.companies){
+        CompanyRef currentCompany = CompanyRef(new Company(company));
+        companies.push_back(currentCompany);
+    }
+}
+
+
 
 void Agent::run() {
     assignNewMorons();
-    Message request{Message::REQUEST, 0, this->timestamp};
-    SendToAll(&request);
+    MessageRequest request{MessageRequest::REQUEST, 0, this->timestamp};
+
     DisposeMorons();
 }
 
@@ -30,25 +35,25 @@ void Agent::assignNewMorons() {
 
 void Agent::DisposeMorons() {
     while (numberOfMoronsToDispose > 0) {
-        Message message;
-        receiveFromAny(&message);
-        if (message.type == Message::REQUEST) {
-            HandleRequest(&message);
-        }
-        else if(message.type == Message::REPLAY){
-            //add to queue before me
-        }
+        MessageRequest message;
+//        receiveFromAny(&message);
+//        if (message.type == MessageRequest::REQUEST) {
+//            HandleRequest(&message);
+//        }
+//        else if(message.type == MessageRequest::REPLAY){
+//            //add to queue before me
+//        }
 
     }
 }
 
-Message *Agent::receiveFromAny(Message *message) {
+MessageRequest *Agent::receiveFromAny(MessageRequest *message) {
     MPI_Recv(&message, 3, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     timestamp = std::max(timestamp, message->timestamp) + 1;
     return message;
 }
 
-void Agent::HandleRequest(Message *message) {
+void Agent::HandleRequest(MessageRequest *message) {
     int sender_rank = getLastSender();
     if (message->timestamp < timestamp or message->timestamp == timestamp and sender_rank < rank){
         //allow
@@ -58,12 +63,6 @@ void Agent::HandleRequest(Message *message) {
         //add to queue
     }
 
-}
-
-Agent::Agent(int rank, int agentsNumber, int initialNumberOfMorons) {
-    this->rank = rank;
-    this->agentsNumber = agentsNumber;
-    this->initialNumberOfMorons = initialNumberOfMorons;
 }
 
 int Agent::getLastSender() {

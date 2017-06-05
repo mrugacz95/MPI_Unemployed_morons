@@ -6,26 +6,29 @@
 #define MPI_UNEMPLOYED_MORONS_AGENT_H
 
 
-#include "Message.h"
+#include "MessageRequest.h"
+#include "Configuration.h"
+#include "Company.h"
 
 class Agent {
 private:
-    int timestamp;
+    int timestamp = 0;
     int initialNumberOfMorons;
     int numberOfMoronsToDispose;
     int rank;
     int agentsNumber;
-
-    void SendToAll(Message *message);
+    std::vector<CompanyRef> companies;
 
     void DisposeMorons();
 
-    Message *receiveFromAny(Message *pMessage);
+    MessageRequest *receiveFromAny(MessageRequest *pMessage);
 
-    void HandleRequest(Message *message);
+    void HandleRequest(MessageRequest *message);
+
+    void initFromConfiguration(Configuration configuration);
 
 public:
-    Agent(int rank, int agentsNumber, int initialNumberOfMorons);
+    Agent(int rank, int agentsNumber, Configuration configuration);
 
     void run();
 

@@ -7,12 +7,10 @@
 
 #include <memory>
 
-struct Message {
-    enum TYPE {REQUEST,REPLAY};
-    TYPE type;
+struct MessageRequest {
     int companyId;
     int timestamp;
 };
 
-typedef std::shared_ptr<Message> MessageRef;
+typedef std::shared_ptr<MessageRequest> MessageRef;
 #endif //MPI_UNEMPLOYED_MORONS_MESSAGE_H

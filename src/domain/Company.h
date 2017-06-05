@@ -7,12 +7,15 @@
 
 
 #include "AgentOnQueue.h"
+#include "Configuration.h"
 #include <queue>
 #include <memory>
 
 class Company {
 public:
     Company(int maxMorons, int maxDamageLevel);
+
+    Company(Configuration::Company company);
 
     int moronsNumber;
     int maxDamageLevel;
