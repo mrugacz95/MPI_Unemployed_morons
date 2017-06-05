@@ -32,12 +32,21 @@ int main(int argc, char *argv[]) {
 
 
     if (rank == 0) {
-        std::string message("Hello123123");
-        std::cout << message << " which size is: " << message.length() << std::endl;
+        std::stringstream message;
+        Configuration::Company company;
+        company.maxDamageLevel =88;
+        company.maxMorons = 66;
+        {
+            cereal::JSONOutputArchive json(message);
+            json(company);
+        }
         Messanger::sendToAll(message, 0);
     } else {
-        std::string receivedStream = Messanger::receiveFromAny(0);
-        std::cout << "Message recevide in thread " << rank << ": " << receivedStream << std::endl;
+        std::stringstream receivedStream = Messanger::receiveFromAny(0);
+        cereal::JSONInputArchive inJson(receivedStream);
+        Configuration::Company comp;
+        inJson(comp);
+        std::cout << "Message recevied :" << rank << "  " << comp.maxMorons << " " << comp.maxDamageLevel <<"\n";
     }
 
     Agent agent(rank, agentsNumber, configuration);

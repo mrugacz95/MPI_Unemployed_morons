@@ -9,9 +9,9 @@
 
 class Messanger {
 public:
-    static void sendToAll(std::string &serializedMessage, int msgTag);
+    static void sendToAll(std::stringstream &serializedMessage, int msgTag);
 
-    static std::string receiveFromAny(int msgTag);
+    static std::stringstream receiveFromAny(int msgTag);
 
     static int getMessageLength(int msgTag);
 };
