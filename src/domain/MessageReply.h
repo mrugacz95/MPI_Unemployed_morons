@@ -10,8 +10,17 @@
 
 class MessageReply: public Message {
 public:
-    MessageReply(Company company, int agentTimestamp);
+    MessageReply(MessageReply::Company &company, int agentTimestamp);
+
+    class Company {
+    public:
+        int id;
+        int timestamp;
+        int morons;
+        int damage;
+    } company;
 };
 
+typedef std::shared_ptr<MessageReply> MessageReplyRef;
 
 #endif //MPI_UNEMPLOYED_MORONS_MESSAGEREPLY_H

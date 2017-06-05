@@ -14,6 +14,8 @@ class Serializer {
 public:
     static std::stringstream serialize(MessageRequest messageRequest);
     static std::stringstream serialize(MessageReply messageReply);
+    static void deserizlize(MessageRequestRef &messageRequest, std::stringstream &serializedMessage);
+    static void deserizlize(MessageReplyRef &messageReply, std::stringstream &serializedMessage);
 };
 
 
