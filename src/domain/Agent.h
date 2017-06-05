@@ -12,7 +12,6 @@
 
 class Agent {
 private:
-    int timestamp = 0;
     int initialNumberOfMorons;
     int numberOfMoronsToDispose;
     int rank;
@@ -20,8 +19,6 @@ private:
     std::vector<CompanyRef> companies;
 
     void DisposeMorons();
-
-    MessageRequest *receiveFromAny(MessageRequest *pMessage);
 
     void HandleRequest(MessageRequest *message);
 
@@ -32,9 +29,10 @@ public:
 
     void run();
 
-    int getLastSender();
 
     void assignNewMorons();
+
+    int timestamp = 0;
 };
 
 

@@ -5,6 +5,7 @@
 #include <mpi.h>
 #include "domain/Agent.h"
 #include "domain/Configuration.h"
+#include "MPIUtils/Messanger.h"
 
 
 int main(int argc, char *argv[]) {
@@ -27,6 +28,17 @@ int main(int argc, char *argv[]) {
               << "max damage: " << configuration.companies[0].maxDamageLevel << " | "
               << "max morons: " << configuration.companies[0].maxMorons << std::endl;
 
+
+
+
+    if (rank == 0) {
+        std::string message("Hello123123");
+        std::cout << message << " which size is: " << message.length() << std::endl;
+        Messanger::sendToAll(message, 0);
+    } else {
+        std::string receivedStream = Messanger::receiveFromAny(0);
+        std::cout << "Message recevide in thread " << rank << ": " << receivedStream << std::endl;
+    }
 
     Agent agent(rank, agentsNumber, configuration);
     agent.run();
