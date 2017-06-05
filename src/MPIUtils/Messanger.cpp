@@ -14,16 +14,16 @@ void Messanger::sendToAll(std::string &serializedMessage, int msgTag) {
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     for (int i = 0; i < world_size; ++i) {
         if (world_rank != i)
-            MPI_Send(serializedMessage.c_str(), (int) serializedMessage.length(), MPI_CHAR, i, msgTag,
+            MPI_Send(serializedMessage.c_str(), (int) serializedMessage.length()+1, MPI_CHAR, i, msgTag,
                      MPI_COMM_WORLD);
     }
 }
 
 std::string Messanger::receiveFromAny(int msgTag) {
     int count = getMessageLength(msgTag);
-    std::shared_ptr<char> recvMessage(new char[count]);
-    MPI_Recv(recvMessage.get(), count, MPI_CHAR, MPI_ANY_SOURCE, msgTag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    std::string toReturn(recvMessage.get());
+    char* recvMessage = new char[count];
+    MPI_Recv(recvMessage, count, MPI_CHAR, MPI_ANY_SOURCE, msgTag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    std::string toReturn(recvMessage);
     return toReturn;
 }
 
@@ -32,6 +32,5 @@ int Messanger::getMessageLength(int msgTag) {
     int count;
     MPI_Probe(MPI_ANY_SOURCE, msgTag, MPI_COMM_WORLD, &status);
     MPI_Get_count(&status, MPI_CHAR, &count);
-    std::cout << count << "\n";
     return count;
 }
