@@ -12,10 +12,10 @@
 
 class Serializer {
 public:
-    static std::stringstream serialize(MessageRequest messageRequest);
-    static std::stringstream serialize(MessageReply messageReply);
-    static void deserizlize(MessageRequestRef &messageRequest, std::stringstream &serializedMessage);
-    static void deserizlize(MessageReplyRef &messageReply, std::stringstream &serializedMessage);
+    static std::stringstream serialize(MessageRequest &messageRequest);
+    static std::stringstream serialize(MessageReply &messageReply);
+    static void deserialize(MessageRequest &messageRequest, std::stringstream &serializedMessage);
+    static void deserialize(MessageReply &messageReply, std::stringstream &serializedMessage);
 };
 
 

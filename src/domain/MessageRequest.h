@@ -8,12 +8,17 @@
 #include <memory>
 #include "Message.h"
 
-class MessageRequest: public Message {
+class MessageRequest : public Message {
 public:
+    MessageRequest() = default;
     MessageRequest(int agentTimestamp, int companyId);
 
-public:
     int companyId;
+
+    template<class Archive>
+    void serialize(Archive &archive) {
+        archive(this->companyId, this->timestamp, this->type);
+    }
 };
 
 typedef std::shared_ptr<MessageRequest> MessageRequestRef;

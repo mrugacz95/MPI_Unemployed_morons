@@ -1,10 +1,10 @@
 /* C Example */
 #include <fstream>
-#include "cereal/archives/json.hpp"
 
 #include <mpi.h>
 #include "domain/Agent.h"
 #include "MPIUtils/Messanger.h"
+#include "cerealUtils/Serializer.h"
 
 
 int main(int argc, char *argv[]) {
@@ -28,22 +28,17 @@ int main(int argc, char *argv[]) {
               << "max morons: " << configuration.companies[0].maxMorons << std::endl;
 
 
+    const int MSG_TAG = 0;
     if (rank == 0) {
-        std::stringstream message;
-        Configuration::Company company;
-        company.maxDamageLevel =88;
-        company.maxMorons = 66;
-        {
-            cereal::JSONOutputArchive json(message);
-            json(company);
-        }
-        Messanger::sendToAll(message, 0);
+        MessageRequest message(1410, 1);
+        std::stringstream serializedMessage = Serializer::serialize(message);
+        Messanger::sendToAll(serializedMessage, MSG_TAG);
     } else {
-        std::stringstream receivedStream = Messanger::receiveFromAny(0);
-        cereal::JSONInputArchive inJson(receivedStream);
-        Configuration::Company comp;
-        inJson(comp);
-        std::cout << "Message recevied :" << rank << "  " << comp.maxMorons << " " << comp.maxDamageLevel <<"\n";
+        std::stringstream serializedMessage = Messanger::receiveFromAny(MSG_TAG);
+        MessageRequest message;
+        Serializer::deserialize(message, serializedMessage);
+        std::cout << "Hello from thread " << rank << " message request timestamp: " << message.timestamp
+                  << " | company id:" << message.companyId << "\n";
     }
 
     Agent agent(rank, agentsNumber, configuration);

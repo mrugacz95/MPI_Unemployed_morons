@@ -10,9 +10,10 @@
 
 class MessageReply: public Message {
 public:
-    MessageReply(MessageReply::Company &company, int agentTimestamp);
+    MessageReply() = default;
+    MessageReply(Company &company, int agentTimestamp);
 
-    class Company {
+    class CompanyData {
     public:
         int id;
         int timestamp;
