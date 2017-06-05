@@ -9,10 +9,12 @@
 #include "Message.h"
 
 class MessageRequest: public Message {
-    int companyId;
 public:
-    int timestamp;
+    MessageRequest(int agentTimestamp, int companyId);
+
+public:
+    int companyId;
 };
 
-typedef std::shared_ptr<MessageRequest> MessageRef;
+typedef std::shared_ptr<MessageRequest> MessageRequestRef;
 #endif //MPI_UNEMPLOYED_MORONS_MESSAGE_REQUEST_H

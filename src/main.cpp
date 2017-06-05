@@ -4,7 +4,6 @@
 
 #include <mpi.h>
 #include "domain/Agent.h"
-#include "domain/Configuration.h"
 #include "MPIUtils/Messanger.h"
 
 
@@ -27,8 +26,6 @@ int main(int argc, char *argv[]) {
               << "company:" << " | "
               << "max damage: " << configuration.companies[0].maxDamageLevel << " | "
               << "max morons: " << configuration.companies[0].maxMorons << std::endl;
-
-
 
 
     if (rank == 0) {

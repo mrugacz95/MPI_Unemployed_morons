@@ -3,7 +3,6 @@
 //
 
 #include <mpi.h>
-#include <zconf.h>
 #include "Messanger.h"
 #include "../domain/MessageRequest.h"
 #include "../domain/Agent.h"

@@ -24,10 +24,6 @@ public:
     int maxMorons;
     std::priority_queue<AgentOnQueue> waitingQueue;
     int timestamp;
-    struct DataToSend {
-    };
-
-    DataToSend getDataToSend();
 };
 
 typedef std::shared_ptr<Company> CompanyRef;

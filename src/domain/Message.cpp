@@ -3,3 +3,8 @@
 //
 
 #include "Message.h"
+
+Message::Message(int timestamp, Message::MESSAGE_TYPE type) {
+    this->timestamp = timestamp;
+    this->type = type;
+}

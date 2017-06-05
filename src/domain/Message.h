@@ -8,8 +8,10 @@
 
 class Message {
 public:
-    enum MESSAGE_TYPE {REQUEST, REPLAY};
+    enum MESSAGE_TYPE {REQUEST, REPLY};
+    Message(int timestamp, MESSAGE_TYPE type);
     MESSAGE_TYPE type;
+    int timestamp;
 };
 
 

@@ -33,12 +33,12 @@ void Agent::assignNewMorons() {
 
 void Agent::DisposeMorons() {
     while (numberOfMoronsToDispose > 0) {
-        MessageRequest message;
+//        MessageRequest message;
 //        std::stringstream message = Messanger::receiveFromAny(0);
 //        if (message.type == MessageRequest::REQUEST) {
 //            HandleRequest(&message);
 //        }
-//        else if(message.type == MessageRequest::REPLAY){
+//        else if(message.type == MessageRequest::REPLY){
 //            //add to queue before me
 //        }
 
