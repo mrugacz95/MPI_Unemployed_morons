@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     }
 
     Agent agent(rank, agentsNumber, configuration);
-    agent.run();
+//    agent.run();
 
     MPI_Finalize();
     return 0;

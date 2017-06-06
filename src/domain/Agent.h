@@ -16,7 +16,7 @@ private:
     int numberOfMoronsToDispose;
     int rank;
     int agentsNumber;
-    std::vector<CompanyRef> companies;
+    std::vector<Company> companies;
 
     void DisposeMorons();
 

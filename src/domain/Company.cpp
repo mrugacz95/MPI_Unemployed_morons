@@ -13,5 +13,4 @@ Company::Company(Configuration::Company company) {
     this->maxMorons = company.maxMorons;
     this->maxDamageLevel = company.maxDamageLevel;
     this->timestamp = 0;
-
 }

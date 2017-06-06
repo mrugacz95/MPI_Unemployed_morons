@@ -9,7 +9,7 @@
 
 class Messanger {
 public:
-    static void sendToAll(std::stringstream &serializedMessage, int msgTag, int &timestamp);
+    static void sendToAll(std::stringstream &serializedMessage, int msgTag);
 
     static std::stringstream receiveFromAny(int msgTag);
 
